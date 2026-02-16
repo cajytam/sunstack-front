@@ -1,0 +1,25 @@
+@use 'sass:list';
+@use 'sass:meta';
+
+@function range($from, $to, $step: 1) {
+  @if meta.type-of($from) != 'number' {
+    @error "$from must be a number.";
+  }
+  @if meta.type-of($to) != 'number' {
+    @error "$to must be a number.";
+  }
+  @if meta.type-of($step) != 'number' {
+    @error "$step must be a number.";
+  }
+  @if $from > $to {
+    @error "$from must be smaller than $to.";
+  }
+
+  $list: [];
+  @while $from <= $to {
+    $list: list.append($list, $from);
+    $from: $from + $step;
+  }
+
+  @return $list;
+}

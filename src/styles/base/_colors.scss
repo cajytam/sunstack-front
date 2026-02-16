@@ -1,0 +1,23 @@
+@use '../functions/palette' as palette;
+
+$colors: (
+  'primary': #26a17e,
+  'yellow': #f7bb16,
+  'info': #03c3ec,
+);
+
+:root {
+  @each $name, $hex in $colors {
+    @each $shade, $color in palette.makeColorPalette($hex) {
+      .bg-#{$name}-#{$shade} {
+        background-color: $color !important;
+      }
+      .color-#{$name}-#{$shade} {
+        color: $color !important;
+      }
+      & {
+        --#{$name}-#{$shade}: #{$color};
+      }
+    }
+  }
+}

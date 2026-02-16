@@ -1,0 +1,46 @@
+@use 'sass:color';
+@use 'sass:math';
+
+@function tetrad($color) {
+  $hue: color.channel($color, 'hue', $space: hsl);
+  $saturation: color.channel($color, 'saturation', $space: hsl);
+  $lightness: color.channel($color, 'lightness', $space: hsl);
+  $tetrad:
+    [ hsl($hue, $saturation, $lightness),
+    hsl($hue + 90 % 360, $saturation, $lightness),
+    hsl($hue + 180 % 360, $saturation, $lightness),
+    hsl($hue + 270 % 360, $saturation, $lightness),
+    ];
+  @return $tetrad;
+}
+
+@function multiply($fore, $back) {
+  $red: math.div(color.channel($back, 'red', $space: rgb) * color.channel($fore, 'red', $space: rgb), 255);
+  $green: math.div(color.channel($back, 'green', $space: rgb) * color.channel($fore, 'green', $space: rgb), 255);
+  $blue: math.div(color.channel($back, 'blue', $space: rgb) * color.channel($fore, 'blue', $space: rgb), 255);
+
+  @return rgb($red, $green, $blue);
+}
+
+@function makeColorPalette($color) {
+  $light: #fff;
+  $dark: multiply($color, $color);
+  $tetrad: tetrad($color);
+  $palette: (
+    50: color.mix($light, $color, 88%),
+    100: color.mix($light, $color, 70%),
+    200: color.mix($light, $color, 50%),
+    300: color.mix($light, $color, 30%),
+    400: color.mix($light, $color, 15%),
+    500: color.mix($light, $color, 0%),
+    600: color.mix($dark, $color, 13%),
+    700: color.mix($dark, $color, 30%),
+    800: color.mix($dark, $color, 46%),
+    900: color.mix($dark, $color, 75%),
+    A100: color.adjust(color.adjust(color.mix($dark, $color, 15%), $saturation: 80%), $lightness: 45.6%),
+    A200: color.adjust(color.adjust(color.mix($dark, $color, 15%), $saturation: 80%), $lightness: 35.6%),
+    A400: color.adjust(color.adjust(color.mix($dark, $color, 15%), $saturation: 100%), $lightness: 25.6%),
+    A700: color.adjust(color.adjust(color.mix($dark, $color, 15%), $saturation: 100%), $lightness: 20.5%),
+  );
+  @return $palette;
+}
