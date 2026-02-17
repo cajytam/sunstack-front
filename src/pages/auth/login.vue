@@ -150,38 +150,63 @@ const onSendResetPassword = () => {
 </script>
 
 <template>
-  <VLayout>
+  <VLayout class="auth-shell">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 1600 3200"
-      class="position-fixed"
+      class="position-fixed auth-waves"
       style="left: 0; top: 0"
       preserveAspectRatio="none"
     >
+      <defs>
+        <linearGradient
+          id="sunstack-sky"
+          x1="0"
+          y1="0"
+          x2="1"
+          y2="1"
+        >
+          <stop
+            offset="0%"
+            stop-color="#fff6e6"
+          />
+          <stop
+            offset="35%"
+            stop-color="#fde2bf"
+          />
+          <stop
+            offset="70%"
+            stop-color="#f6c58d"
+          />
+          <stop
+            offset="100%"
+            stop-color="#ef6b1f"
+          />
+        </linearGradient>
+      </defs>
       <rect
-        fill="var(--primary-500)"
+        fill="url(#sunstack-sky)"
         width="1600"
         height="3200"
       />
       <path
-        fill="var(--primary-400)"
-        d="M478.4 581c3.2 0.8 6.4 1.7 9.5 2.5c196.2 52.5 388.7 133.5 593.5 176.6c174.2 36.6 349.5 29.2 518.6-10.2V0H0v574.9c52.3-17.6 106.5-27.7 161.1-30.9C268.4 537.4 375.7 554.2
-  478.4 581z"
+        fill="var(--sunstack-400)"
+        opacity="0.55"
+        d="M0 520C220 430 480 420 760 480C1020 540 1250 690 1600 640L1600 0H0Z"
       />
       <path
-        fill="var(--primary-300)"
-        d="M181.8 259.4c98.2 6 191.9 35.2 281.3 72.1c2.8 1.1 5.5 2.3 8.3 3.4c171 71.6 342.7 158.5 531.3 207.7c198.8 51.8 403.4 40.8 597.3-14.8V0H0v283.2C59 263.6 120.6 255.7 181.8 259.4z"
+        fill="var(--sunstack-300)"
+        opacity="0.7"
+        d="M0 360C260 280 520 300 780 360C1040 420 1290 540 1600 500L1600 0H0Z"
       />
       <path
-        fill="var(--primary-200)"
-        d="M454.9 86.3C600.7 177 751.6 269.3 924.1 325c208.6 67.4 431.3 60.8 637.9-5.3c12.8-4.1 25.4-8.4 38.1-12.9V0H288.1c56 21.3 108.7 50.6 159.7 82C450.2 83.4 452.5 84.9 454.9 86.3z"
-      />
-      <path
-        fill="var(--primary-100)"
-        d="M1397.5 154.8c47.2-10.6 93.6-25.3 138.6-43.8c21.7-8.9 43-18.8 63.9-29.5V0H643.4c62.9 41.7 129.7 78.2 202.1 107.4C1020.4 178.1 1214.2 196.1 1397.5 154.8z"
+        fill="var(--sunstack-200)"
+        opacity="0.85"
+        d="M0 220C280 140 560 180 820 240C1100 305 1340 420 1600 380L1600 0H0Z"
       />
     </svg>
     <VLayout>
+      <div class="auth-glow" />
       <VRow
         class="auth-wrapper pa-4"
         align="center"
@@ -193,10 +218,10 @@ const onSendResetPassword = () => {
         >
           <VForm @submit="onSubmit">
             <VCard
-              class="auth-card pa-4 pt-7 mx-auto"
+              class="auth-card sunstack-card pa-4 pt-7 mx-auto"
               max-width="448"
             >
-              <VCardTitle class="mb-5">
+              <VCardTitle class="mb-2">
                 <VImg
                   class="d-flex mx-auto pt-5"
                   max-width="200"
@@ -204,6 +229,10 @@ const onSendResetPassword = () => {
                   alt="logo SunStack"
                 />
               </VCardTitle>
+              <VCardText class="text-center mb-2">
+                <h1 class="auth-title">Bienvenue sur SunStack</h1>
+                <p class="auth-subtitle">Connectez-vous pour accéder à votre espace.</p>
+              </VCardText>
               <VCardText>
                 <VTextField
                   id="username"
@@ -211,6 +240,8 @@ const onSendResetPassword = () => {
                   label="Email"
                   type="email"
                   class="login-form__text"
+                  variant="outlined"
+                  density="comfortable"
                 />
               </VCardText>
               <VCardText>
@@ -221,6 +252,8 @@ const onSendResetPassword = () => {
                   :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
                   :type="showPassword ? 'text' : 'password'"
                   label="Mot de passe"
+                  variant="outlined"
+                  density="comfortable"
                   @click:append-inner="showPassword = !showPassword"
                 />
               </VCardText>
@@ -233,6 +266,7 @@ const onSendResetPassword = () => {
                   append-icon="material-symbols:login"
                   :loading="isLoading"
                   :disabled="isLoading"
+                  class="login-submit"
                   @click.prevent="onSubmit"
                 />
               </div>
@@ -247,6 +281,7 @@ const onSendResetPassword = () => {
                   <template #activator="{ props }">
                     <VBtn
                       text="Mot de passe oublié"
+                      class="reset-link"
                       variant="text"
                       size="small"
                       v-bind="props"
@@ -254,7 +289,7 @@ const onSendResetPassword = () => {
                   </template>
                   <VCard
                     min-width="300"
-                    class="border"
+                    class="border reset-card"
                   >
                     <VCardTitle>
                       <span class="text-caption font-italic">
@@ -306,6 +341,35 @@ const onSendResetPassword = () => {
   min-block-size: calc(var(--vh, 1vh) * 100);
 }
 
+.auth-shell {
+  --sunstack-500: #e46a2d;
+  --sunstack-400: #e9b490;
+  --sunstack-300: #f1d4bf;
+  --sunstack-200: #f6e6d9;
+  --sunstack-100: #faf4ee;
+  background:
+    radial-gradient(1100px circle at 10% 10%, rgba(255, 255, 255, 0.4), transparent 65%),
+    linear-gradient(160deg, #f8f0e8 0%, #fff 60%, #f3eee9 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-waves {
+  opacity: 0.75;
+  filter: saturate(0.9);
+}
+
+.auth-glow {
+  position: absolute;
+  inset: -30% -10% auto auto;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(228, 106, 45, 0.12), transparent 65%);
+  filter: blur(2px);
+  animation: glow-float 10s ease-in-out infinite;
+  pointer-events: none;
+}
+
 .layout-blank .auth-wrapper .auth-footer-mask {
   position: absolute;
   inset-block-end: 0;
@@ -339,6 +403,28 @@ const onSendResetPassword = () => {
   z-index: 1 !important;
 }
 
+.sunstack-card {
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.9));
+  border: 1px solid rgba(228, 106, 45, 0.12);
+  backdrop-filter: blur(10px);
+  animation: card-rise 600ms ease-out;
+}
+
+.auth-title {
+  font-family: 'Space Grotesk', 'Plus Jakarta Sans', 'Avenir Next', 'Segoe UI', sans-serif;
+  font-size: 1.6rem;
+  line-height: 1.2;
+  color: #2a211b;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.4rem;
+}
+
+.auth-subtitle {
+  font-size: 0.95rem;
+  color: #6b5a4b;
+  margin: 0;
+}
+
 @media (min-width: 960px) {
   .skin--bordered .auth-card-v2 {
     border-inline-start: 1px solid rgba(var(--v-border-color), var(--v-border-opacity)) !important;
@@ -357,6 +443,65 @@ const onSendResetPassword = () => {
 }
 
 .login-form__text {
-  color: #333;
+  color: #2a211b;
+}
+
+.login-form__text :deep(.v-field) {
+  border-radius: 14px;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.login-form__text :deep(.v-field__outline) {
+  --v-field-border-opacity: 0.28;
+}
+
+.login-form__text :deep(.v-field--focused .v-field__outline) {
+  color: #e46a2d;
+}
+
+.login-submit {
+  background: linear-gradient(135deg, #e46a2d 0%, #ee9a66 55%, #f3c1a0 100%);
+  color: #fff;
+  border-radius: 999px;
+  text-transform: none;
+  letter-spacing: 0.01em;
+  box-shadow: 0 12px 24px rgba(228, 106, 45, 0.2);
+}
+
+.login-submit:hover {
+  transform: translateY(-1px);
+}
+
+.reset-link {
+  color: #6b5a4b !important;
+  text-transform: none;
+}
+
+.reset-card {
+  background: #fffaf2;
+  border-color: rgba(228, 106, 45, 0.12) !important;
+}
+
+@keyframes glow-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translate3d(-14px, 10px, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes card-rise {
+  from {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 </style>
