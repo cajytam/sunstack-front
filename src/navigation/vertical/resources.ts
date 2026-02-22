@@ -18,7 +18,7 @@ export default [
     title: 'Onduleurs',
     icon: { icon: 'cbi:fronius-inverter-gen24' },
     to: 'calculator-inverter',
-    action: 'manage',
-    subject: 'all',
+    action: 'standard',
+    subject: 'sales',
   },
 ]
