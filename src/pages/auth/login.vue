@@ -277,8 +277,8 @@ const onSendResetPassword = () => {
                 class="mb-4"
               >
                 <div class="text-caption">
-                  <strong>Identifiants du compte utilisateur test :</strong><br>
-                  Email : <code>sales@sunstack.com</code><br>
+                  <strong>Identifiants du compte utilisateur test :</strong><br />
+                  Email : <code>sales@sunstack.com</code><br />
                   Mot de passe : <code>sunstackDemo</code>
                 </div>
               </VAlert>
