@@ -270,6 +270,18 @@ const onSendResetPassword = () => {
                   @click.prevent="onSubmit"
                 />
               </div>
+              <VAlert
+                type="info"
+                variant="tonal"
+                density="compact"
+                class="mb-4"
+              >
+                <div class="text-caption">
+                  <strong>Identifiants du compte utilisateur test :</strong><br>
+                  Email : <code>sales@sunstack.com</code><br>
+                  Mot de passe : <code>sunstackDemo</code>
+                </div>
+              </VAlert>
               <VCardActions class="d-flex justify-end gap-x-3">
                 <VMenu
                   v-model="displayResetPassword"
