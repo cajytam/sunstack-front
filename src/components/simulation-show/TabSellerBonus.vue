@@ -38,7 +38,7 @@ const potentialSellerBonus = computedAsync(async () => {
     <VRow>
       <VCol
         cols="12"
-        lg="5"
+        lg="8"
       >
         <VCard>
           <VCardText>
