@@ -66,6 +66,6 @@ jobs:
           port: ${{ secrets.VPS_PORT }}
           envs: REGISTRY,IMAGE_NAME,DOCKER_TAG
           script: |
-            docker compose stop frontend
+            docker compose down frontend
             docker rmi ${REGISTRY}/${IMAGE_NAME}:${DOCKER_TAG} || true
-            docker compose up -d
+            docker compose up -d > /dev/null 2>&1
